@@ -33,15 +33,19 @@ object EmojiConfig {
         context: Context,
         replaceAll: Boolean = true,
         useBundledEmojiCompat: Boolean = false
-    ): EmojiCompat.Config = synchronized(instanceLock) {
+    ): EmojiCompat.Config {
         if (this.useBundledEmojiCompat != useBundledEmojiCompat && ::config.isInitialized)
             return config
-        this.useBundledEmojiCompat = useBundledEmojiCompat
+        synchronized(instanceLock) {
+            this.useBundledEmojiCompat = useBundledEmojiCompat
+        }
         if (useBundledEmojiCompat) {
             val className = "${BundledEmojiConfig.PACKAGE_NAME}.${BundledEmojiConfig.CLASS_NAME}"
             val bundledProvider =
                 Class.forName(className).kotlin.objectInstance as BundledEmojiConfig
-            config = bundledProvider.loadConfig(context)
+            synchronized(instanceLock) {
+                config = bundledProvider.loadConfig(context)
+            }
         } else {
             with(
                 FontRequest(
@@ -51,10 +55,14 @@ object EmojiConfig {
                     R.array.com_google_android_gms_fonts_certs
                 )
             ) {
-                config = FontRequestEmojiCompatConfig(context, this)
+                synchronized(instanceLock) {
+                    config = FontRequestEmojiCompatConfig(context, this)
+                }
             }
         }
-        config.setReplaceAll(replaceAll)
+        synchronized(instanceLock) {
+            config.setReplaceAll(replaceAll)
+        }
         return config
     }
 }

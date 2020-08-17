@@ -27,7 +27,7 @@ import java.lang.RuntimeException
 import kotlin.coroutines.CoroutineContext
 
 object EmojiLoader {
-    private val TAG = "EmojiLoader"
+    private val TAG = EmojiLoader::class.simpleName!!
     private val instanceLock = Object()
     private lateinit var emojiCompat: EmojiCompat
     var coroutineScope: CoroutineScope = GlobalScope
