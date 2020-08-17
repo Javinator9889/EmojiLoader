@@ -25,6 +25,7 @@ import androidx.emoji.text.FontRequestEmojiCompatConfig
 
 
 object EmojiConfig {
+    private val instanceLock = Object()
     private lateinit var config: EmojiCompat.Config
     private var useBundledEmojiCompat = false
 
@@ -32,7 +33,7 @@ object EmojiConfig {
         context: Context,
         replaceAll: Boolean = true,
         useBundledEmojiCompat: Boolean = false
-    ): EmojiCompat.Config {
+    ): EmojiCompat.Config = synchronized(instanceLock) {
         if (this.useBundledEmojiCompat != useBundledEmojiCompat && ::config.isInitialized)
             return config
         this.useBundledEmojiCompat = useBundledEmojiCompat
