@@ -26,17 +26,68 @@ import kotlinx.coroutines.*
 import java.lang.RuntimeException
 import kotlin.coroutines.CoroutineContext
 
-
+/**
+ * EmojiLoader is the main class of this module. By using [Kotlin coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
+ * this object loads asynchronously the required [EmojiCompat] instance, which usually takes
+ * some precious time.
+ *
+ * This object exposes a single method [loadAsync] as well as the available [options], for
+ * customizing the [EmojiCompat] instance. A typical code workflow would be:
+ *
+ * ```kotlin
+ * // Assume we are declaring some private variables at an activity's body
+ * private lateinit var loader: Deferred<EmojiCompat>
+ *
+ * // Assume we are at the "onCreate" method of an activity
+ * EmojiLoader.options.coroutineScope = activityScope
+ * EmojiLoader.options.replaceAll = true
+ *
+ * if (!::loader.isInitialized) loader = EmojiLoader.loadAsync(applicationContext)
+ *
+ * // Assume we are on another method which is called later after initialization.
+ * // < CAUTION! As this is a coroutine, you will need a suspendable method >
+ * val emojiCompat = loader.await()
+ * textView.text = emojiCompat.process("U+1F600")
+ * ```
+ *
+ * Take into account that this instance produces both debugging and error messages through
+ * [Log], so please check those if any error happens.
+ *
+ * Note: this instance is thread-safe/coroutine-safe, which means that it can be accessed
+ * by multiple threads at the same time without errors.
+ */
 object EmojiLoader {
+    /** Instance tag user when calling [Log]'s methods **/
     private val TAG = EmojiLoader::class.simpleName!!
+
+    /** Instance lock used for synchronization purposes **/
     private val instanceLock = Object()
+
+    /** [EmojiCompat] saved instance for instant returning when created and configurated **/
     private lateinit var emojiCompat: EmojiCompat
+
+    /**
+     * Multiple accessible options used when configuring the [EmojiCompat.Config] instance.
+     *
+     * Access them by addressing:
+     * ```kotlin
+     * EmojiLoader.options.replaceAll = true
+     * // ...
+     * ```
+     *
+     * @see EmojiLoaderOptions
+     */
     val options = object : EmojiLoaderOptions {
         override var coroutineScope: CoroutineScope = GlobalScope
         override var replaceAll: Boolean = true
         override var useBundledEmojiCompat: Boolean = false
     }
 
+    /**
+     * Loads asynchronously the [EmojiCompat] client. Notice that this method uses coroutines for
+     * handling the process in background, so you will need a suspendable method (or another
+     * coroutine scope) for properly await until method's completion.
+     */
     fun loadAsync(
         context: Context,
         coroutineContext: CoroutineContext = Dispatchers.IO
@@ -54,9 +105,7 @@ object EmojiLoader {
         } catch (_: IllegalStateException) {
             Log.d("${TAG}\$loadAsync", "The library is not initialized yet so initializing")
             val emojiLoadDeferred = CompletableDeferred<EmojiCompat>()
-            val emojiCompat = EmojiConfig.get(context, options).run {
-                EmojiCompat.init(this)
-            }
+            val emojiCompat = EmojiConfig.get(context, options).run { EmojiCompat.init(this) }
             emojiCompat.registerInitCallback(object : EmojiCompat.InitCallback() {
                 override fun onInitialized() {
                     super.onInitialized()

@@ -22,7 +22,10 @@ import android.content.Context
 import androidx.emoji.bundled.BundledEmojiCompatConfig
 import com.javinator9889.emojiloader.IBundledEmojiConfig
 
-
+/**
+ * Test documentation using Dokka. The object [BundledEmojiConfig]
+ * should not be deleted by ProGuard
+ */
 object BundledEmojiConfig : IBundledEmojiConfig {
     override fun loadConfig(context: Context) = BundledEmojiCompatConfig(context)
 }

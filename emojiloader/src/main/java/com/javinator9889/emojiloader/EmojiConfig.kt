@@ -35,6 +35,9 @@ import androidx.emoji.text.EmojiCompat
  *
  * Note: this class is globally thread-safe/co-routine safe, which means you can access any of
  * its methods securely from any thread.
+ *
+ * @author Javinator9889
+ * @since v1.0
  */
 object EmojiConfig {
     /** Global instance lock - for synchronization purposes **/

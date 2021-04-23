@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         EmojiLoader.options.replaceAll = true
         if (BuildConfig.FLAVOR == "full") EmojiLoader.options.useBundledEmojiCompat = true
         if (!::loader.isInitialized) {
-            loader = EmojiLoader.loadAsync(this)
+            loader = EmojiLoader.loadAsync(applicationContext)
         }
         binding.startButton.setOnClickListener(this)
     }
