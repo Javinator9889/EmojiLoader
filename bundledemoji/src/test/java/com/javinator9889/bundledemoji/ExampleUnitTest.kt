@@ -1,4 +1,4 @@
-package com.javinator9889.emojiloader
+package com.javinator9889.bundledemoji
 
 import org.junit.Test
 

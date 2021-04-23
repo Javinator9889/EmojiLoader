@@ -1,3 +1,4 @@
+include ':bundledemoji'
 include ':emojiloader'
 include ':app'
 rootProject.name = "EmojiLoader"

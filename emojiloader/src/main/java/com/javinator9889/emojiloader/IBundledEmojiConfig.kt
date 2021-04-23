@@ -21,10 +21,10 @@ package com.javinator9889.emojiloader
 import android.content.Context
 import androidx.emoji.text.EmojiCompat
 
-interface BundledEmojiConfig {
+interface IBundledEmojiConfig {
     companion object {
-        val PACKAGE_NAME = "com.javinator9889.bundledemoji"
-        val CLASS_NAME = "BundledEmojiConfig"
+        const val PACKAGE_NAME = "com.javinator9889.bundledemoji"
+        const val CLASS_NAME = "BundledEmojiConfig"
     }
 
     fun loadConfig(context: Context): EmojiCompat.Config

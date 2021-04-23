@@ -1,4 +1,4 @@
-package com.javinator9889.emojiloader
+package com.javinator9889.bundledemoji
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.javinator9889.emojiloader", appContext.packageName)
+        assertEquals("com.javinator9889.bundledemoji.test", appContext.packageName)
     }
 }
