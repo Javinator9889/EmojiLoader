@@ -25,25 +25,27 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.emoji.text.EmojiCompat
 import com.javinator9889.emojiloader.EmojiLoader
-import kotlinx.android.synthetic.main.activity_main.*
+import com.javinator9889.emojiloaderdemo.databinding.ActivityMainBinding
 import kotlinx.coroutines.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
     private val activityJob = Job()
     private val activityScope = CoroutineScope(Dispatchers.Default + activityJob)
     private var stopped = true
+    private lateinit var binding: ActivityMainBinding
     private lateinit var loader: Deferred<EmojiCompat>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         EmojiLoader.options.coroutineScope = activityScope
         EmojiLoader.options.replaceAll = true
         if (BuildConfig.FLAVOR == "full") EmojiLoader.options.useBundledEmojiCompat = true
         if (!::loader.isInitialized) {
             loader = EmojiLoader.loadAsync(this)
         }
-        startButton.setOnClickListener(this)
+        binding.startButton.setOnClickListener(this)
     }
 
     override fun finish() {
@@ -53,21 +55,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     @SuppressLint("SetTextI18n")
     override fun onClick(v: View?) {
-        if (v != startButton)
+        if (v != binding.startButton)
             return
-        if (stopped) startButton.text = "Tap to stop"
+        if (stopped) binding.startButton.text = "Tap to stop"
         stopped = !stopped
         activityScope.launch {
             val emojiCompat = loader.await()
             val emojis = resources.getStringArray(R.array.emojis)
             for (emoji in emojis) {
                 withContext(Dispatchers.Main) {
-                    emojiView += "${emojiCompat.process(emoji)} "
-                    scrollView.fullScroll(View.FOCUS_DOWN)
+                    binding.emojiView += "${emojiCompat.process(emoji)} "
+                    binding.scrollView.fullScroll(View.FOCUS_DOWN)
                 }
                 if (stopped) break
             }
-            withContext(Dispatchers.Main) { startButton.text = "Tap to start" }
+            withContext(Dispatchers.Main) { binding.startButton.text = "Tap to start" }
             stopped = true
         }
     }
