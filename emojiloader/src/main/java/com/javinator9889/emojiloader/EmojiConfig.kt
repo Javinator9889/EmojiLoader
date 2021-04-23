@@ -28,24 +28,19 @@ object EmojiConfig {
     private val instanceLock = Object()
     private lateinit var config: EmojiCompat.Config
     private var useBundledEmojiCompat = false
+    private var isConfigInit = false
 
     fun get(
         context: Context,
-        replaceAll: Boolean = true,
-        useBundledEmojiCompat: Boolean = false
-    ): EmojiCompat.Config {
-        if (this.useBundledEmojiCompat != useBundledEmojiCompat && ::config.isInitialized)
-            return config
-        synchronized(instanceLock) {
-            this.useBundledEmojiCompat = useBundledEmojiCompat
-        }
+        options: EmojiLoaderOptions
+    ): EmojiCompat.Config = synchronized(instanceLock) {
+        if (isConfigInit && ::config.isInitialized) return config
+        useBundledEmojiCompat = options.useBundledEmojiCompat
         if (useBundledEmojiCompat) {
-            val className = "${BundledEmojiConfig.PACKAGE_NAME}.${BundledEmojiConfig.CLASS_NAME}"
+            val className = "${IBundledEmojiConfig.PACKAGE_NAME}.${IBundledEmojiConfig.CLASS_NAME}"
             val bundledProvider =
-                Class.forName(className).kotlin.objectInstance as BundledEmojiConfig
-            synchronized(instanceLock) {
-                config = bundledProvider.loadConfig(context)
-            }
+                Class.forName(className).kotlin.objectInstance as IBundledEmojiConfig
+            config = bundledProvider.loadConfig(context)
         } else {
             with(
                 FontRequest(
@@ -55,14 +50,15 @@ object EmojiConfig {
                     R.array.com_google_android_gms_fonts_certs
                 )
             ) {
-                synchronized(instanceLock) {
-                    config = FontRequestEmojiCompatConfig(context, this)
-                }
+                config = FontRequestEmojiCompatConfig(context, this)
             }
         }
-        synchronized(instanceLock) {
-            config.setReplaceAll(replaceAll)
-        }
+        config.setReplaceAll(options.replaceAll)
+        isConfigInit = true
         return config
+    }
+
+    fun reset() {
+        synchronized(instanceLock) { isConfigInit = false }
     }
 }

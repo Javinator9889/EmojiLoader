@@ -26,22 +26,26 @@ import kotlinx.coroutines.*
 import java.lang.RuntimeException
 import kotlin.coroutines.CoroutineContext
 
+
 object EmojiLoader {
     private val TAG = EmojiLoader::class.simpleName!!
     private val instanceLock = Object()
     private lateinit var emojiCompat: EmojiCompat
     var coroutineScope: CoroutineScope = GlobalScope
+    val options = object : EmojiLoaderOptions {
+        override var coroutineScope: CoroutineScope = GlobalScope
+        override var replaceAll: Boolean = true
+        override var useBundledEmojiCompat: Boolean = false
+    }
 
     fun loadAsync(
         context: Context,
-        coroutineContext: CoroutineContext = Dispatchers.IO,
-        replaceAll: Boolean = false,
-        useBundledEmojiCompat: Boolean = false
+        coroutineContext: CoroutineContext = Dispatchers.IO
     ): Deferred<EmojiCompat> = coroutineScope.async(context = coroutineContext) {
         try {
             synchronized(instanceLock) {
                 if (::emojiCompat.isInitialized && emojiCompat.loadState == LOAD_STATE_SUCCEEDED) {
-                    Log.d("${TAG}/loadAsync", "Obtaining previously generated instance")
+                    Log.d("${TAG}\$loadAsync", "Obtaining previously generated instance")
                     return@async emojiCompat
                 }
                 Log.d("${TAG}/loadAsync", "Trying to fetch singleton for the first time")
@@ -49,9 +53,9 @@ object EmojiLoader {
             }
             return@async emojiCompat
         } catch (_: IllegalStateException) {
-            Log.d("${TAG}/loadAsync", "The library is not initialized yet so initializing")
+            Log.d("${TAG}\$loadAsync", "The library is not initialized yet so initializing")
             val emojiLoadDeferred = CompletableDeferred<EmojiCompat>()
-            val emojiCompat = EmojiConfig.get(context, replaceAll, useBundledEmojiCompat).run {
+            val emojiCompat = EmojiConfig.get(context, options).run {
                 EmojiCompat.init(this)
             }
             emojiCompat.registerInitCallback(object : EmojiCompat.InitCallback() {
@@ -76,7 +80,7 @@ object EmojiLoader {
             return@async this@EmojiLoader.emojiCompat
         } catch (err: Throwable) {
             Log.e(
-                "${TAG}/loadAsync",
+                "${TAG}\$loadAsync",
                 "Unexpected error occurred during EmojiCompat initialization!",
                 err
             )
