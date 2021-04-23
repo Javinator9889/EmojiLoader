@@ -37,3 +37,11 @@ dependencies {
     implementation 'androidx.emoji:emoji-bundled:1.1.0'
     implementation project(":emojiloader")
 }
+
+dokkaHtml.configure {
+    dokkaSourceSets {
+        named("main") {
+            noAndroidSdkLink.set(false)
+        }
+    }
+}
