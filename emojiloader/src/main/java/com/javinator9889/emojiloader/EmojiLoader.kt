@@ -31,7 +31,6 @@ object EmojiLoader {
     private val TAG = EmojiLoader::class.simpleName!!
     private val instanceLock = Object()
     private lateinit var emojiCompat: EmojiCompat
-    var coroutineScope: CoroutineScope = GlobalScope
     val options = object : EmojiLoaderOptions {
         override var coroutineScope: CoroutineScope = GlobalScope
         override var replaceAll: Boolean = true
@@ -41,7 +40,7 @@ object EmojiLoader {
     fun loadAsync(
         context: Context,
         coroutineContext: CoroutineContext = Dispatchers.IO
-    ): Deferred<EmojiCompat> = coroutineScope.async(context = coroutineContext) {
+    ): Deferred<EmojiCompat> = options.coroutineScope.async(context = coroutineContext) {
         try {
             synchronized(instanceLock) {
                 if (::emojiCompat.isInitialized && emojiCompat.loadState == LOAD_STATE_SUCCEEDED) {
