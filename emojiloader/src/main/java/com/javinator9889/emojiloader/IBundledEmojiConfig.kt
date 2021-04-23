@@ -26,6 +26,9 @@ import androidx.emoji.text.EmojiCompat
  * itself. Currently, this is used by [com.javinator9889.bundledemoji.BundledEmojiConfig]
  * class, which provides an easy-to-use object for loading all the available emojis at once.
  *
+ * Since version 1.0, this is also used by [EmojiConfigGMSLoader] class for loading from
+ * Google Play Services.
+ *
  * This is interesting for:
  *  + Loading all emojis directly for slow or old phones.
  *  + Be able to use every emoji independently if the phone has or not Google Play Services.
