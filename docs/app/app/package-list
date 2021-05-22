@@ -1,0 +1,9 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.javinator9889.emojiloaderdemo////PointingToDeclaration/app/com.javinator9889.emojiloaderdemo/index.html
+$dokka.location:com.javinator9889.emojiloaderdemo/MainActivity///PointingToDeclaration/app/com.javinator9889.emojiloaderdemo/-main-activity/index.html
+$dokka.location:com.javinator9889.emojiloaderdemo/MainActivity/MainActivity/#/PointingToDeclaration/app/com.javinator9889.emojiloaderdemo/-main-activity/-main-activity.html
+$dokka.location:com.javinator9889.emojiloaderdemo/MainActivity/finish/#/PointingToDeclaration/app/com.javinator9889.emojiloaderdemo/-main-activity/finish.html
+$dokka.location:com.javinator9889.emojiloaderdemo/MainActivity/onClick/#android.view.View?/PointingToDeclaration/app/com.javinator9889.emojiloaderdemo/-main-activity/on-click.html
+com.javinator9889.emojiloaderdemo
+

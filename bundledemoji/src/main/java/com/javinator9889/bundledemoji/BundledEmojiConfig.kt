@@ -23,8 +23,15 @@ import androidx.emoji.bundled.BundledEmojiCompatConfig
 import com.javinator9889.emojiloader.IBundledEmojiConfig
 
 /**
- * Test documentation using Dokka. The object [BundledEmojiConfig]
- * should not be deleted by ProGuard
+ * Base object inheriting from [IBundledEmojiConfig] which is used when the
+ * [com.javinator9889.emojiloader.EmojiLoaderOptions.useBundledEmojiCompat] is set to `true`.
+ *
+ * When [com.javinator9889.emojiloader.EmojiConfig] loads the configuration uses Kotlin's
+ * reflection to dynamically load the class by accessing package name. Notice that enabling the
+ * [com.javinator9889.emojiloader.EmojiLoaderOptions.useBundledEmojiCompat] but not adding the
+ * `bundledemoji` package will lead to a [ClassNotFoundException] error.
+ *
+ * @see com.javinator9889.emojiloader.EmojiConfig
  */
 object BundledEmojiConfig : IBundledEmojiConfig {
     override fun loadConfig(context: Context) = BundledEmojiCompatConfig(context)

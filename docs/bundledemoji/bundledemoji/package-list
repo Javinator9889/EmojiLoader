@@ -1,0 +1,7 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.javinator9889.bundledemoji////PointingToDeclaration/bundledemoji/com.javinator9889.bundledemoji/index.html
+$dokka.location:com.javinator9889.bundledemoji/BundledEmojiConfig///PointingToDeclaration/bundledemoji/com.javinator9889.bundledemoji/-bundled-emoji-config/index.html
+$dokka.location:com.javinator9889.bundledemoji/BundledEmojiConfig/loadConfig/#android.content.Context/PointingToDeclaration/bundledemoji/com.javinator9889.bundledemoji/-bundled-emoji-config/load-config.html
+com.javinator9889.bundledemoji
+

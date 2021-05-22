@@ -1,0 +1,22 @@
+$dokka.format:html-v1
+$dokka.linkExtension:html
+$dokka.location:com.javinator9889.emojiloader////PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/index.html
+$dokka.location:com.javinator9889.emojiloader/EmojiConfig///PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-config/index.html
+$dokka.location:com.javinator9889.emojiloader/EmojiConfig/get/#android.content.Context#com.javinator9889.emojiloader.EmojiLoaderOptions/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-config/get.html
+$dokka.location:com.javinator9889.emojiloader/EmojiConfig/reset/#/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-config/reset.html
+$dokka.location:com.javinator9889.emojiloader/EmojiConfigGMSLoader///PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-config-g-m-s-loader/index.html
+$dokka.location:com.javinator9889.emojiloader/EmojiConfigGMSLoader/loadConfig/#android.content.Context/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-config-g-m-s-loader/load-config.html
+$dokka.location:com.javinator9889.emojiloader/EmojiLoader///PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-loader/index.html
+$dokka.location:com.javinator9889.emojiloader/EmojiLoader/loadAsync/#android.content.Context#kotlin.coroutines.CoroutineContext/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-loader/load-async.html
+$dokka.location:com.javinator9889.emojiloader/EmojiLoader/options/#/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-loader/options.html
+$dokka.location:com.javinator9889.emojiloader/EmojiLoaderOptions///PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-loader-options/index.html
+$dokka.location:com.javinator9889.emojiloader/EmojiLoaderOptions/coroutineScope/#/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-loader-options/coroutine-scope.html
+$dokka.location:com.javinator9889.emojiloader/EmojiLoaderOptions/replaceAll/#/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-loader-options/replace-all.html
+$dokka.location:com.javinator9889.emojiloader/EmojiLoaderOptions/useBundledEmojiCompat/#/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-emoji-loader-options/use-bundled-emoji-compat.html
+$dokka.location:com.javinator9889.emojiloader/IBundledEmojiConfig.Companion///PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-i-bundled-emoji-config/-companion/index.html
+$dokka.location:com.javinator9889.emojiloader/IBundledEmojiConfig.Companion/CLASS_NAME/#/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-i-bundled-emoji-config/-companion/-c-l-a-s-s_-n-a-m-e.html
+$dokka.location:com.javinator9889.emojiloader/IBundledEmojiConfig.Companion/PACKAGE_NAME/#/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-i-bundled-emoji-config/-companion/-p-a-c-k-a-g-e_-n-a-m-e.html
+$dokka.location:com.javinator9889.emojiloader/IBundledEmojiConfig///PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-i-bundled-emoji-config/index.html
+$dokka.location:com.javinator9889.emojiloader/IBundledEmojiConfig/loadConfig/#android.content.Context/PointingToDeclaration/emojiloader/com.javinator9889.emojiloader/-i-bundled-emoji-config/load-config.html
+com.javinator9889.emojiloader
+
