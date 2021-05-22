@@ -20,9 +20,35 @@ package com.javinator9889.emojiloader
 
 import kotlinx.coroutines.CoroutineScope
 
-
+/**
+ * Template that allows multiple configurations for the [EmojiLoader]
+ * instance. Notice that there is no class that directly inherits from this
+ * interface but some objects use it for creating a basic configuration.
+ *
+ * You won't need to create an own class implementing this interface but changing the
+ * [EmojiLoader.options] object.
+ */
 interface EmojiLoaderOptions {
+    /**
+     * The scope to which the [EmojiLoader] will be attached. If not provided, [EmojiLoader.options]
+     * uses [kotlinx.coroutines.GlobalScope].
+     */
     var coroutineScope: CoroutineScope
+
+    /**
+     * Determines whether EmojiCompat should replace all the emojis it finds with the EmojiSpans.
+     * By default EmojiCompat tries its best to understand if the system already can render an
+     * emoji and do not replace those emojis. If not provided, defaults to `false`.
+     *
+     * @see androidx.emoji.text.EmojiCompat.Config.setReplaceAll
+     */
     var replaceAll: Boolean
+
+    /**
+     * Determines whether to use the embedded fonts package or accessing Play Services' fonts.
+     * Notice that using bundled emoji increases (a lot) application's size, but it's useful when
+     * distributing a application from a store different than Play Store or for older devices
+     * (Android 4.4 or lower). If not provided, defaults to `false`.
+     */
     var useBundledEmojiCompat: Boolean
 }

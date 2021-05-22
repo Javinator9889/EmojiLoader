@@ -79,7 +79,7 @@ object EmojiLoader {
      */
     val options = object : EmojiLoaderOptions {
         override var coroutineScope: CoroutineScope = GlobalScope
-        override var replaceAll: Boolean = true
+        override var replaceAll: Boolean = false
         override var useBundledEmojiCompat: Boolean = false
     }
 
